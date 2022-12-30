@@ -10,13 +10,12 @@ $(function(){
 	if(windowSize <= 768){
 		$(".menu").css("width", "0").css("padding", "0");
 		open = false;
-		console.log(windowSize);
+		
 	}
 
 	$(".menu-btn").click(function(){
 
-		var windowSize = $(window)[0].innerWidth;
-		var targetSizeMenu = (windowSize <= 768) ? 250 : 300;
+	
 
 		if(open){
 			$(".menu").animate({"width":"0", "padding" : "0"}, function(){
@@ -69,5 +68,20 @@ $(function(){
 			}
 
 	})
+
+	$("[formato=data]").mask("99/99/9999");
+
+	$("[actionBtn=delete]").click(function(){
+
+		var r = confirm("Deseja excluir o registro?");
+
+		if(r == true){
+			return true;
+		}else{
+			return false;
+		}
+
+
+	});
 
 })

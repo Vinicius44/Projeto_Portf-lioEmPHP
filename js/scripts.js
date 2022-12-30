@@ -1,3 +1,6 @@
+
+
+
 $(function(){
 
 
@@ -42,8 +45,14 @@ $(function(){
 			$("[realtime]").click(function(){
 				
 				var pagina = $(this).attr('realtime');
+				$(".container-principal").hide();
 				$('.container-principal').load('/Projetos_PHP/Projeto_01/pages/'+pagina+'.php');
+				
+
+				$(".container-principal").fadeIn(1000);
+				window.history.pushState("", "", pagina);
 				return false;
+
 			})
 		}
 

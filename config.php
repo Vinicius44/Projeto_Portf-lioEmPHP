@@ -1,5 +1,7 @@
 <?php 
 
+
+
 	session_start();
 	date_default_timezone_set("America/Sao_Paulo");
 	$autoload = function($class){
@@ -22,17 +24,53 @@
 	define("PASSWORD", "");
 	define("DATABASE","projeto_01");
 
+	define("NOME_EMPRESA", "Danki Code");
+
+	//Variaveis cargo painel
+	$arr = [
+
+			"0" => "Normal",
+			"1" => "Sub-Administrador",
+			"2" => "Adiministrador"];
+
 	//Funções 
 
-	function pegaCargo($cargo){
-		$arr = [
-			"0" => "Normal",
-			"1" => "Sub Administrador",
-			"2" => "Admistrador"
-		];
+	function pegaCargo($indice){
+		
+		
 
-		return $arr[$cargo];
+		return Painel::$cargos[$indice];
+
 	}
 	
+	function selecionadoMenu($par){
+		//<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+		$url = explode("/" ,@$_GET['url'])[0];
+		if($url == $par){
+			echo "class='menu-active'";
+		}
+	}
 
+	function verificaPermissaoMenu($permissao){
+		if($_SESSION["cargo"] >= $permissao){
+			return;
+		}else{
+			echo "style='display:none;'";
+		}
+	}
+
+	function verificaPermissaoPagina($permissao){
+		if($_SESSION["cargo"] >= $permissao){
+			return;
+		}else{
+			include("painel/pages/verificacaoNegada.php");
+			die();
+		}
+	}
+
+	function recoverPost($post){
+		if(isset($_POST[$post])){
+			echo $_POST[$post];
+		}
+	}
 ?>
